@@ -1,0 +1,28 @@
+# packages/google_maps.yaml
+name: google_maps_flutter
+
+dependencies:
+  - google_maps_flutter: ^2.2.3
+
+requirements:
+  - key: maps_api_key
+    prompt: Google Maps API Key
+    pattern: ^AIza[0-9A-Za-z-_]{35}$
+
+android:
+  permissions:
+    - INTERNET
+  manifest:
+    - type: meta-data
+      name: com.google.android.geo.API_KEY
+      value: $maps_api_key
+      
+ios:
+  imports:
+    - GoogleMaps
+  app_delegate:
+    - GMSServices.provideAPIKey("$maps_api_key")
+example: |
+  GoogleMap(
+    initialCameraPosition: CameraPosition(...)
+  )
